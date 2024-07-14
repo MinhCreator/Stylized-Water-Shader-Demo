@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b35mxcc3d74di"]
+
+[ext_resource type="Material" uid="uid://cr3d3bff3sxup" path="res://Stylized_Water.material" id="1_efc70"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vgt8a"]
+size = Vector2(10, 10)
+subdivide_width = 500
+subdivide_depth = 500
+
+[node name="water" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_vgt8a")
+surface_material_override/0 = ExtResource("1_efc70")

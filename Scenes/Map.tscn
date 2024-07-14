@@ -1,0 +1,80 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2cn81exi4yqx"]
+
+[ext_resource type="PackedScene" uid="uid://b35mxcc3d74di" path="res://Scenes/WaterPlane.tscn" id="1_8u2yh"]
+[ext_resource type="Shader" path="res://Shaders/Terrain.gdshader" id="1_italc"]
+[ext_resource type="Texture2D" uid="uid://b67a4e66obqlx" path="res://Shaders/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="3_y2d7a"]
+[ext_resource type="Material" uid="uid://cr3d3bff3sxup" path="res://Stylized_Water.material" id="4_3pthh"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_bnxbg"]
+size = Vector2(20, 20)
+subdivide_width = 200
+subdivide_depth = 200
+orientation = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aaygo"]
+seed = 38
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ey57i"]
+seamless = true
+noise = SubResource("FastNoiseLite_aaygo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q4a22"]
+render_priority = 0
+shader = ExtResource("1_italc")
+shader_parameter/albedo = Color(0, 0.584314, 0, 1)
+shader_parameter/noise_scale = 50.0
+shader_parameter/height_scale = 2.429
+shader_parameter/noise = SubResource("NoiseTexture2D_ey57i")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cusnu"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_k7sfj"]
+panorama = ExtResource("3_y2d7a")
+
+[sub_resource type="Sky" id="Sky_2p17s"]
+sky_material = SubResource("PanoramaSkyMaterial_k7sfj")
+
+[sub_resource type="Environment" id="Environment_a76v2"]
+background_mode = 2
+sky = SubResource("Sky_2p17s")
+ambient_light_source = 3
+reflected_light_source = 2
+volumetric_fog_density = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_s4dx4"]
+subdivide_width = 100
+subdivide_height = 100
+subdivide_depth = 500
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(0.999997, 0.00183603, 0.00135851, -0.00183804, 0.999997, 0.00148084, -0.0013558, -0.00148333, 0.999998, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.943025, -0.00307868, -0.332709, -0.00406404, 0.999989, 0.00226579, 0.332699, 0.00348884, -0.943027, -5.72553, 0.958037, -1.96375)
+visible = false
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 6.13909e-12, 2.32831e-10, -2.03954e-10, 1, 0, 0, 0, 1, 0.001, -0.409, -0.001)
+mesh = SubResource("QuadMesh_bnxbg")
+skeleton = NodePath("../DirectionalLight3D")
+surface_material_override/0 = SubResource("ShaderMaterial_q4a22")
+
+[node name="Water" parent="." instance=ExtResource("1_8u2yh")]
+transform = Transform3D(2.94397, 1.00499e-10, -9.31323e-10, -2.58024e-09, 1.00763, -4.65661e-10, -1.86265e-09, -2.32831e-10, 3.09269, -0.00183804, 0.999997, 0.00148084)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, -1.21072e-08, -5.06407e-09, -8.68567e-11, -0.309017, 0.951057, 0, -0.951057, -0.309017, -2.56117, 7.50695, 0.00592335)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999989, -0.00367808, -0.00270886, 0.00367003, 0.999988, -0.00296914, 0.00271975, 0.00295917, 0.999994, -2.722, 0.894, 0.005)
+mesh = SubResource("SphereMesh_cusnu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a76v2")
+
+[node name="water_box" type="MeshInstance3D" parent="."]
+transform = Transform3D(32.0053, -4.84079e-10, 3.72529e-09, -2.19006e-08, 0.995993, -4.84288e-08, -7.45058e-09, -4.65661e-10, 32.2978, 7.52607e-11, 0.395, -5.82077e-11)
+visible = false
+mesh = SubResource("BoxMesh_s4dx4")
+surface_material_override/0 = ExtResource("4_3pthh")
