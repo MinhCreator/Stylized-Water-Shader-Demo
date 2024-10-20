@@ -1,0 +1,12 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1729405916
+icon.svg::CompressedTexture2D::4953800166442266650::1729405827::1729405924::1::::<><>::
+README.md::TextFile::-1::1729405827::0::1::::<><>::
+Stylized_Water.material::ShaderMaterial::6024086500066764355::1729405827::0::1::::<><>::res://water.gdshader
+water.gdshader::Shader::-1::1729405827::0::1::::<><>::
+::res://Scenes/::1729405827
+Map.tscn::PackedScene::6672918526069216607::1729405827::0::1::::<><>::uid://b35mxcc3d74di::::res://Scenes/WaterPlane.tscn<>res://Shaders/Terrain.gdshader<>uid://b67a4e66obqlx::::res://Shaders/AllSkyFree_Sky_EpicBlueSunset_Equirect.png<>uid://cr3d3bff3sxup::::res://Stylized_Water.material
+WaterPlane.tscn::PackedScene::4414409424766612626::1729405827::0::1::::<><>::uid://cr3d3bff3sxup::::res://Stylized_Water.material
+::res://Shaders/::1729405827
+AllSkyFree_Sky_EpicBlueSunset_Equirect.png::CompressedTexture2D::4628386972034862293::1729405827::1729405924::1::::<><>::
+Terrain.gdshader::Shader::-1::1729405827::0::1::::<><>::
